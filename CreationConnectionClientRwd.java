@@ -13,7 +13,7 @@ import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
-public class CreationConnectionClient extends DesiredCapabilitiesTest {
+public class CreationConnectionClientRwd extends DesiredCapabilitiesTest {
   protected String baseUrl;
 
    
@@ -24,7 +24,7 @@ public class CreationConnectionClient extends DesiredCapabilitiesTest {
     });
   }
    
-  public CreationConnectionClient(String browser, String version, String plateform) throws MalformedURLException {
+  public CreationConnectionClientRwd(String browser, String version, String plateform) throws MalformedURLException {
     super(browser, version, plateform);
     this.hubURL = new URL("http://127.0.0.1:4444/wd/hub");
     this.baseUrl = "http://aomagento.jetpulp.dev";
@@ -34,11 +34,11 @@ public class CreationConnectionClient extends DesiredCapabilitiesTest {
 	  
 	java.util.Date date= new java.util.Date();  
 	Timestamp timestamp = new Timestamp(date.getTime());
-    driver.get(baseUrl + "/client/customer/account/login/");
+    driver.get(baseUrl + "/client_4/customer/account/login/");
     String email = "nicolas.tiran"+timestamp.hashCode()+"@jetpulp.fr";
       
-    //fluentWait(By.cssSelector("a.sel-create-account"), 1, 10);
-    //driver.findElement(By.cssSelector("a.sel-create-account")).click();
+    fluentWait(By.cssSelector("a.sel-create-account"), 1, 10);
+    driver.findElement(By.cssSelector("a.sel-create-account")).click();
     
     fluentWait(By.cssSelector("button.sel-register"), 1, 10);
     assertTrue("Bouton creation de compte present",isElementPresent(By.cssSelector("button.sel-register")));
@@ -58,12 +58,11 @@ public class CreationConnectionClient extends DesiredCapabilitiesTest {
     driver.findElement(By.id("is_subscribed")).click();
     driver.findElement(By.cssSelector(".sel-register")).click();
     
-    fluentWait(By.cssSelector("a.sel-logout"), 1, 10);
-    
-    //Attention peut être cacher par le developper bar
+    fluentWait(By.cssSelector("a.sel-account"), 1, 10);
+    driver.findElement(By.cssSelector("a.sel-account")).click();
     driver.findElement(By.cssSelector("a.sel-logout")).click();
-    System.err.println("Logout");
-    driver.get(baseUrl + "/client/customer/account/login/");
+    //fluentWait(By.cssSelector("a.sel-create-account"), 1, 10);
+    driver.get(baseUrl + "/client_4/customer/account/login/");
     fluentWait(By.cssSelector("button.sel-login"), 1, 10);
     assertTrue("Bouton connexion au compte present",isElementPresent(By.cssSelector("button.sel-login")));
     driver.findElement(By.id("email")).clear();
@@ -71,7 +70,6 @@ public class CreationConnectionClient extends DesiredCapabilitiesTest {
     driver.findElement(By.id("pass")).clear();
     driver.findElement(By.id("pass")).sendKeys("HBnm124!");
     driver.findElement(By.cssSelector("button.sel-login")).click();
-    fluentWait(By.cssSelector("body.customer-account-index"));
   }
 
 
