@@ -27,6 +27,7 @@ public class CreationConnectionClient extends DesiredCapabilitiesTest {
   public CreationConnectionClient(String browser, String version, String plateform) throws MalformedURLException {
     super(browser, version, plateform);
     this.hubURL = new URL("http://127.0.0.1:4444/wd/hub");
+    //this.baseUrl = "http://aomagento.addonline.biz/";
     this.baseUrl = "http://aomagento.jetpulp.dev";
   }
   @Test

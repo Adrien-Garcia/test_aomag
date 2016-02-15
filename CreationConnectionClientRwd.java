@@ -27,6 +27,7 @@ public class CreationConnectionClientRwd extends DesiredCapabilitiesTest {
   public CreationConnectionClientRwd(String browser, String version, String plateform) throws MalformedURLException {
     super(browser, version, plateform);
     this.hubURL = new URL("http://127.0.0.1:4444/wd/hub");
+    //this.baseUrl = "http://aomagento.addonline.biz/";
     this.baseUrl = "http://aomagento.jetpulp.dev";
   }
   @Test
@@ -34,6 +35,7 @@ public class CreationConnectionClientRwd extends DesiredCapabilitiesTest {
 	  
 	java.util.Date date= new java.util.Date();  
 	Timestamp timestamp = new Timestamp(date.getTime());
+	// le theme rwd a été appliqué au client_4  : c'est donc à modifié !!
     driver.get(baseUrl + "/client_4/customer/account/login/");
     String email = "nicolas.tiran"+timestamp.hashCode()+"@jetpulp.fr";
       
@@ -62,6 +64,8 @@ public class CreationConnectionClientRwd extends DesiredCapabilitiesTest {
     driver.findElement(By.cssSelector("a.sel-account")).click();
     driver.findElement(By.cssSelector("a.sel-logout")).click();
     //fluentWait(By.cssSelector("a.sel-create-account"), 1, 10);
+    
+    // le theme rwd a été appliqué au client_4  : c'est donc à modifié !!
     driver.get(baseUrl + "/client_4/customer/account/login/");
     fluentWait(By.cssSelector("button.sel-login"), 1, 10);
     assertTrue("Bouton connexion au compte present",isElementPresent(By.cssSelector("button.sel-login")));

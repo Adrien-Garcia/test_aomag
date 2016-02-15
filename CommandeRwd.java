@@ -24,12 +24,14 @@ public class CommandeRwd extends DesiredCapabilitiesTest {
   public CommandeRwd(String browser, String version, String plateform) throws MalformedURLException {
     super(browser, version, plateform);
     this.hubURL = new URL("http://127.0.0.1:4444/wd/hub");
+    //this.baseUrl = "http://aomagento.addonline.biz/";
     this.baseUrl = "http://aomagento.jetpulp.dev/";
   }
   @Test
   public void testCommande() throws Exception {
 	  
-	// le theme rwd a été appliqué au client_4
+	// le theme rwd a été appliqué au client_4  : c'est donc à modifié !!
+	  
     driver.get(baseUrl + "client_4/");
     
     //Page d'accueil
