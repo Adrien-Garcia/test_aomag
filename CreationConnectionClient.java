@@ -28,7 +28,7 @@ public class CreationConnectionClient extends DesiredCapabilitiesTest {
     super(browser, version, plateform);
     this.hubURL = new URL("http://127.0.0.1:4444/wd/hub");
     //this.baseUrl = "http://aomagento.addonline.biz/";
-    this.baseUrl = "http://aomagento.jetpulp.dev";
+    this.baseUrl = "http://aomagento.jerivoalan.jetpulp.dev";
   }
   @Test
   public void testConnection() throws Exception {
@@ -61,7 +61,7 @@ public class CreationConnectionClient extends DesiredCapabilitiesTest {
     
     fluentWait(By.cssSelector("a.sel-logout"), 1, 10);
     
-    //Attention peut être cacher par le developper bar
+    //Attention peut ï¿½tre cacher par le developper bar
     driver.findElement(By.cssSelector("a.sel-logout")).click();
     System.err.println("Logout");
     driver.get(baseUrl + "/client/customer/account/login/");

@@ -17,22 +17,22 @@ public class Commande extends DesiredCapabilitiesTest {
   protected String baseUrl;
 
    
-  /*@Parameters
+  @Parameters
   public static Collection<Object[]> desiredCapabilities() {
     return Arrays.asList (new Object[][] {     
       { "firefox", "", "ANY" }
     });
-  }*/
+  }
    
   public Commande(String browser, String version, String plateform) throws MalformedURLException {
     super(browser, version, plateform);
-    //this.hubURL = new URL("http://127.0.0.1:4444/wd/hub");
-    this.baseUrl = "http://aomagento.addonline.biz/";
-    //this.baseUrl = "http://aomagento.jetpulp.dev/";
+    this.hubURL = new URL("http://127.0.0.1:4444/wd/hub");
+    this.baseUrl = "http://aomagento.jerivoalan.jetpulp.dev/";
   }
   @Test
   public void testCommande() throws Exception {
-    driver.get(baseUrl + "client/");
+    //driver.get(baseUrl + "client/");
+	driver.get(baseUrl);
     Actions action = new Actions(driver);
     
     //Page d'accueil
@@ -40,8 +40,8 @@ public class Commande extends DesiredCapabilitiesTest {
     
     Thread.sleep(2000);
     
-    //Click sur la premiere categorie : au premier niveau : si c'est pas suffisant faire un click sur la premiere catégorie qui renvoie vers un rayon
-    driver.findElement(By.cssSelector("ul[id=nav] > li.level0.nav-1 > a")).click();
+    //Click sur la premiere categorie : au premier niveau : si c'est pas suffisant faire un click sur la premiere catï¿½gorie qui renvoie vers un rayon
+    driver.findElement(By.cssSelector("ul[id=nav] > li.level0.nav-2 > a")).click();
     fluentWait(By.cssSelector(".sel-item-product"), 1, 10);
     
     // Un lien ajouter au panier sur le rayon ?
@@ -62,7 +62,7 @@ public class Commande extends DesiredCapabilitiesTest {
     fluentWait(By.cssSelector(".sel-j2tajax-confirm"), 1, 10);
     // on attend le chargement du contenu dans la popin
     fluentWait(By.cssSelector(".sel-j2tajax-confirm .sel-j2t-checkout-link"), 1, 10);
-    clickWait(By.cssSelector(".sel-j2tajax-confirm .sel-j2t-checkout-link"), 1, 10);
+    //clickAndWait(By.cssSelector(".sel-j2tajax-confirm .sel-j2t-checkout-link"), 1, 10);
     
     //click vers le panier
     System.err.println("click vers le panier");
