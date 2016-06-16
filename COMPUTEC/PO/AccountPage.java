@@ -146,7 +146,6 @@ public class AccountPage extends _BasePage {
 		if (subscriptionCheckBox.isSelected() == false)
 			subscriptionCheckBox.click();
 		subscriptionCheckBox.submit();
-		accountLink.click();
 	}
 
 	/**
@@ -178,7 +177,6 @@ public class AccountPage extends _BasePage {
 		if (subscriptionCheckBox.isSelected() == true)
 			subscriptionCheckBox.click();
 		subscriptionCheckBox.submit();
-		accountLink.click();
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package tests.test_aomagento.COMPUTEC.PO;
+package tests.test_aomagento.BRANDER.PO;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

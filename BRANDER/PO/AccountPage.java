@@ -1,4 +1,4 @@
-package tests.test_aomagento.RWD.PO;
+package tests.test_aomagento.BRANDER.PO;
 
 import java.util.Iterator;
 import java.util.List;
@@ -24,11 +24,11 @@ import base.PageObjectException;
  * @version 1.0
  * @since 2015-04-25
  */
-public class AccountPageRwd extends _BasePageRwd {
+public class AccountPage extends _BasePage {
 	/**
 	 * Logger pour cette classe
 	 */
-	private static Log log = LogFactory.getLog(AccountPageRwd.class);
+	private static Log log = LogFactory.getLog(AccountPage.class);
 
 	// Elements du DOM
 	/**
@@ -76,13 +76,8 @@ public class AccountPageRwd extends _BasePageRwd {
 	/**
 	 * Checkbox inscription à la newsletter
 	 */
-	@FindBy(css = ".sel-subscribe-newsletter input")
+	@FindBy(css = ".sel-subscribe-newsletter")
 	private WebElement subscriptionCheckBox;
-	/**
-	 * Bouton de validation
-	 */
-	@FindBy(css = ".sel-save-subscription")
-	private WebElement validSubscriptionBtn;
 
 	/**
 	 * Message succés
@@ -101,7 +96,7 @@ public class AccountPageRwd extends _BasePageRwd {
 	 *            WebDriver Selenium
 	 * @throws PageObjectException
 	 */
-	public AccountPageRwd(RemoteWebDriver _driver) throws PageObjectException {
+	public AccountPage(RemoteWebDriver _driver) throws PageObjectException {
 		super(_driver);
 		PageFactory.initElements(driver, this);
 
@@ -116,10 +111,10 @@ public class AccountPageRwd extends _BasePageRwd {
 	 * @return <b>AccountEditPageRwd</b> Page informations du compte
 	 * @throws PageObjectException
 	 */
-	public AccountEditPageRwd goToInfoAccount() throws PageObjectException {
+	public AccountEditPage goToInfoAccount() throws PageObjectException {
 		try {
 			accountEditLink.click();
-			return new AccountEditPageRwd(driver);
+			return new AccountEditPage(driver);
 
 		} catch (Exception e) {
 			throw new PageObjectException(this.driver,e);
@@ -148,7 +143,6 @@ public class AccountPageRwd extends _BasePageRwd {
 	 */
 	public void subscribeToNewsletter() {
 		newsletterLink.click();
-		new PageObjectException(driver, ""+isElementPresent(validSubscriptionBtn));
 		if (subscriptionCheckBox.isSelected() == false)
 			subscriptionCheckBox.click();
 		subscriptionCheckBox.submit();
@@ -182,7 +176,7 @@ public class AccountPageRwd extends _BasePageRwd {
 		newsletterLink.click();
 		if (subscriptionCheckBox.isSelected() == true)
 			subscriptionCheckBox.click();
-		validSubscriptionBtn.click();
+		subscriptionCheckBox.submit();
 	}
 
 	/**
@@ -191,9 +185,9 @@ public class AccountPageRwd extends _BasePageRwd {
 	 * @return <b>AccountAddressPageRwd</b>
 	 * @throws PageObjectException
 	 */
-	public AddressBookPageRwd goToAddressMenuLink() throws PageObjectException {
+	public AddressBookPage goToAddressMenuLink() throws PageObjectException {
 		addressBookLink.click();
-		return new AddressBookPageRwd(driver);
+		return new AddressBookPage(driver);
 	}
 
 	/**
@@ -202,11 +196,11 @@ public class AccountPageRwd extends _BasePageRwd {
 	 * @return <b>AccountWishlistPageRwd</b> page liste d'envie
 	 * @throws PageObjectException
 	 */
-	public WishlistPageRwd goToWishlist() throws PageObjectException {
+	public WishlistPage goToWishlist() throws PageObjectException {
 		Actions action = new Actions(driver);
 		action.moveToElement(wishlistLink).click(wishlistLink).perform();
 		new WebDriverWait(driver, 2);
-		return new WishlistPageRwd(driver);
+		return new WishlistPage(driver);
 	}
 
 }

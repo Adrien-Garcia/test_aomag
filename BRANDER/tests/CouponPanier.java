@@ -1,39 +1,35 @@
-package tests.test_aomagento.COMPUTEC.tests;
-
-import base.Constant;
-import base.DesiredCapabilitiesTestNG;
-import tests.test_aomagento.RWD.PO.AccountPageRwd;
-import tests.test_aomagento.RWD.PO.CatalogPageRwd;
-import tests.test_aomagento.RWD.PO.HomePageRwd;
-import tests.test_aomagento.RWD.PO.ProductPageRwd;
-import tests.test_aomagento.RWD.PO.ShoppingCartPageRwd;
-import tests.test_aomagento.RWD.PO.SignInPageRwd;
+package tests.test_aomagento.BRANDER.tests;
 
 import java.text.DecimalFormat;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class CouponPanierRwd extends DesiredCapabilitiesTestNG {
+import base.Constant;
+import base.DesiredCapabilitiesTestNG;
+import tests.test_aomagento.BRANDER.PO.AccountPage;
+import tests.test_aomagento.BRANDER.PO.CatalogPage;
+import tests.test_aomagento.BRANDER.PO.HomePage;
+import tests.test_aomagento.BRANDER.PO.ProductPage;
+import tests.test_aomagento.BRANDER.PO.ShoppingCartPage;
+import tests.test_aomagento.BRANDER.PO.SignInPage;
 
-	private static Log log = LogFactory.getLog(CouponPanierRwd.class);
+public class CouponPanier extends DesiredCapabilitiesTestNG {
 
-	HomePageRwd homePage;
-	SignInPageRwd signInPage;
-	AccountPageRwd accountPage;
-	CatalogPageRwd catalogPage;
-	ProductPageRwd productPage;
-	ShoppingCartPageRwd cartPage;
+	private static Log log = LogFactory.getLog(CouponPanier.class);
+
+	HomePage homePage;
+	SignInPage signInPage;
+	AccountPage accountPage;
+	CatalogPage catalogPage;
+	ProductPage productPage;
+	ShoppingCartPage cartPage;
 
 	@Test(description = "Application coupon dans le panier")
 	public void testCouponPanierRwd() throws Exception {
-
-		log.info(":: Test Thème Rwd :: application coupon au panier ::");
-
-		homePage = new HomePageRwd(driver);
+		homePage = new HomePage(driver);
 
 		// On connecte l'utilisateur s'il ne l'est pas
 		if (!homePage.isUserLoggedIn()) {
@@ -42,14 +38,16 @@ public class CouponPanierRwd extends DesiredCapabilitiesTestNG {
 			Assert.assertTrue(accountPage.isUserLoggedIn());
 			homePage = accountPage.goToHomePage();
 		}
+		
+		// On vide le panier ce qui permet d'annuler une quelconque remise si déjà appiquee
+		cartPage = homePage.goToCart();
+		cartPage.emptyCart();
+		homePage = cartPage.goToHomePage();
 
 		// On ajoute un produit au panier
-		catalogPage = homePage.goToCategory(1);
-		productPage = catalogPage.clickOnProduct(0);
+		catalogPage = homePage.goToCategory(Constant.Category2);
+		productPage = catalogPage.clickOnProduct(Constant.Product1);
 		cartPage = productPage.addProductToCart(4);
-
-		// On annule la remise si existante
-		cartPage.cancelDiscount();
 
 		// On recupere le prix ttc avant remise
 		float prixAvtRemise = cartPage.getTtcPrice();
@@ -72,9 +70,7 @@ public class CouponPanierRwd extends DesiredCapabilitiesTestNG {
 		Assert.assertTrue(remiseCalculee == prixAprRemise);
 
 		// On annule la réduction après test
-		cartPage.cancelDiscount();
-
-		log.info(":: Test validé:: application coupon au panier ::");
+		cartPage.emptyCart();
 
 	}
 }

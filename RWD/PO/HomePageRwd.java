@@ -76,14 +76,14 @@ public class HomePageRwd extends _BasePageRwd {
 	 * @return CatalogPageRwd page catalogue correspondante
 	 * @throws PageObjectException
 	 */
-	public CatalogPageRwd goToCategory(int nCategory) throws PageObjectException {
+	public CatalogSearchRwd goToCategory(int nCategory) throws PageObjectException {
 		try {
 			Actions action = new Actions(driver);
 			action.moveToElement(menuL0.get(nCategory)).click().perform();
 			//menuL0.get(nCategory).click();
 			log.info("Catégorie " + nCategory + " clickée, accés à sa page...");
 			new PageObjectException(driver, getNameCategory(nCategory));
-			return new CatalogPageRwd(driver);
+			return new CatalogSearchRwd(driver);
 		} catch (Exception e) {
 			if (menuL0.size() == 0)
 				throw new PageObjectException(this.driver,"Le menu n'est pas accessible ou n'existe pas", e);
@@ -105,14 +105,14 @@ public class HomePageRwd extends _BasePageRwd {
 	 * @return
 	 * @throws PageObjectException
 	 */
-	public CatalogPageRwd goToSubCategory(int nCategory, int subCategory) throws PageObjectException {
+	public CatalogSearchRwd goToSubCategory(int nCategory, int subCategory) throws PageObjectException {
 
 		Actions action = new Actions(driver);
 		action.moveToElement(menuL0.get(nCategory)).perform();
 		List<WebElement> subMenu = menuL0.get(nCategory).findElements(By.cssSelector(".level0 > .level1"));
 		subMenu.get(subCategory).click();
 		log.info("Sous Catégorie " + subCategory + " du Menu " + nCategory + " clickée, accés à sa page...");
-		return new CatalogPageRwd(driver);
+		return new CatalogSearchRwd(driver);
 	}
 
 	/**

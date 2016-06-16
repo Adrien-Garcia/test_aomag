@@ -1,4 +1,4 @@
-package tests.test_aomagento.COMPUTEC.PO;
+package tests.test_aomagento.BRANDER.PO;
 
 import java.util.List;
 
@@ -62,6 +62,16 @@ public class ProductPage extends _BasePage {
 	@FindBy(css = ".sel-link-compare")
 	private WebElement addToComparator;
 	/**
+	 * Lien permettant d'ouvrir la fenêtre du comparateur
+	 */
+	@FindBy(css = ".compare-link .link")
+	private WebElement openComparatorBtn;
+	/**
+	 * Nombres d'elements comparateur
+	 */
+	@FindBy(css = ".compare-link .count")
+	private WebElement nbComparator;
+	/**
 	 * Input permettant de renseigner la quantité du produit à ajouter au panier
 	 */
 	@FindBy(css = ".sel-qty")
@@ -77,19 +87,19 @@ public class ProductPage extends _BasePage {
 	 */
 	@FindBy(css = ".sel-j2t-checkout-link")
 	private WebElement confirmBtn;
-	
+
 	/**
 	 * Lien s'affichant s'il n'y a encore aucun commentaire pour le produit
 	 */
 	@FindBy(css = ".sel-no-rating a")
 	private WebElement noReviewLink;
-	
+
 	/**
 	 * Lien d'ajout de commentaire s'il y en a déjà de présent
 	 */
 	@FindBy(css = ".sel-add-rating")
 	private WebElement addReviewLink;
-	
+
 	/**
 	 * Input pour la note du commentaire
 	 */
@@ -127,7 +137,7 @@ public class ProductPage extends _BasePage {
 		PageFactory.initElements(driver, this);
 
 		if (!isElementPresent(productViewBody)) {
-			throw new PageObjectException(this.driver,"Ce n'est pas la page attendue : " + driver.getCurrentUrl());
+			throw new PageObjectException(this.driver, "Ce n'est pas la page attendue : " + driver.getCurrentUrl());
 		}
 	}
 
@@ -141,7 +151,7 @@ public class ProductPage extends _BasePage {
 		try {
 			return productName.getText();
 		} catch (Exception e) {
-			throw new PageObjectException(this.driver,e);
+			throw new PageObjectException(this.driver, e);
 		}
 	}
 
@@ -155,7 +165,7 @@ public class ProductPage extends _BasePage {
 		try {
 			return productView.getAttribute("id");
 		} catch (Exception e) {
-			throw new PageObjectException(this.driver,e);
+			throw new PageObjectException(this.driver, e);
 		}
 	}
 
@@ -184,7 +194,7 @@ public class ProductPage extends _BasePage {
 	 * @throws PageObjectException
 	 */
 	public ShoppingCartPage addProductToCart(int quantity) throws PageObjectException {
-		if (isProductInStock() == true){
+		if (isProductInStock() == true) {
 			String product = getProductName();
 			// On test si l'input qte est present
 			if (isElementPresent(qtyInput)) {
@@ -198,12 +208,16 @@ public class ProductPage extends _BasePage {
 				dropdownOption.selectByIndex(1);
 			}
 			addToCartBtn.click();
-			fluentWait(confirmBtn);
-			confirmBtn.click();
+			try {
+				fluentWait(confirmBtn);
+				confirmBtn.click();
+			} catch (Exception e) {
+
+			}
 			log.info("Ajout du produit " + product + " au panier");
 			return new ShoppingCartPage(driver);
 		} else {
-			throw new PageObjectException(this.driver,"Le produit est épuisé");
+			throw new PageObjectException(this.driver, "Le produit est épuisé");
 		}
 	}
 
@@ -218,7 +232,7 @@ public class ProductPage extends _BasePage {
 			addToWishlistLink.click();
 			return new WishlistPage(driver);
 		} catch (Exception e) {
-			throw new PageObjectException(this.driver,"Ajout du produit à la liste d'envie échoué" + e);
+			throw new PageObjectException(this.driver, "Ajout du produit à la liste d'envie échoué" + e);
 		}
 	}
 
@@ -232,7 +246,33 @@ public class ProductPage extends _BasePage {
 			addToComparator.click();
 			log.info(getProductName() + " ajouté au comparateur");
 		} catch (Exception e) {
-			throw new PageObjectException(this.driver,"L'ajout au comparteur ne s'est pas effectué", e);
+			throw new PageObjectException(this.driver, "L'ajout au comparteur ne s'est pas effectué", e);
+		}
+	}
+
+	/**
+	 * Récupere le nombre de produits présents dans le bloc du comparateur
+	 * 
+	 * @return le nombre de produits présents dans le bloc du comparateur
+	 */
+	public int getNumberProductsInComparator() {
+		String comp = nbComparator.getText();
+		int nb = Integer.parseInt(comp.substring(1, comp.length() - 1));
+		return nb;
+	}
+
+	/**
+	 * Ouvre la fenêtre du comparateur
+	 * 
+	 * @return page comparateur
+	 * @throws PageObjectException
+	 */
+	public ComparatorPage openComparator() throws PageObjectException {
+		if (getNumberProductsInComparator() > 0) {
+			openComparatorBtn.click();
+			return new ComparatorPage(driver);
+		} else {
+			throw new PageObjectException(this.driver, "Le comparateur est vide");
 		}
 	}
 
@@ -256,9 +296,9 @@ public class ProductPage extends _BasePage {
 			else
 				addReviewLink.click();
 			fluentWait(reviewInput);
-			if (reviewRatingInput.size() >0)
+			if (reviewRatingInput.size() > 0)
 				System.out.println("yalla");
-				reviewRatingInput.get(4).click();
+			reviewRatingInput.get(4).click();
 			reviewInput.clear();
 			reviewInput.sendKeys(review);
 			reviewTitleInput.clear();
@@ -268,7 +308,7 @@ public class ProductPage extends _BasePage {
 			nicknameInput.submit();
 			log.info("Commentaire envoyé");
 		} catch (Exception e) {
-			throw new PageObjectException(this.driver,"L'envoi du commentaire a echoué", e);
+			throw new PageObjectException(this.driver, "L'envoi du commentaire a echoué", e);
 		}
 	}
 
