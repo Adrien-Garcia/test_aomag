@@ -1,4 +1,4 @@
-package tests.test_aomagento.COMPUTEC.PO;
+package tests.test_aomagento.BRANDER.PO;
 
 import java.util.List;
 
@@ -61,8 +61,9 @@ public class HomePage extends _BasePage {
 	 */
 	public HomePage(RemoteWebDriver _driver) throws PageObjectException {
 		super(_driver);
-//		driver.get("http://aomagento.jerivoalan.jetpulp.dev/" + "computec/");
-		driver.get("http://cls.preprod.addonline.biz/");
+		driver.navigate().to("http://aomagento.jerivoalan.jetpulp.dev/" + "brander/");
+//		driver.get("http://aomagento.jerivoalan.jetpulp.dev/" + "brander/");
+//		driver.get("http://cls.preprod.addonline.biz/");
 		PageFactory.initElements(this.driver, this);
 		
 		if (!isElementPresent(homeBody)) {

@@ -1,4 +1,4 @@
-package tests.test_aomagento.COMPUTEC.PO;
+package tests.test_aomagento.BRANDER.PO;
 
 import java.util.List;
 
@@ -151,7 +151,7 @@ public class CheckoutPage extends _BasePage {
 	/**
 	 * Liste choix méthode de payement
 	 */
-	@FindBy(css = ".sel-form-payment")
+	@FindBy(css = ".sel-form-payment .radio")
 	private List<WebElement> payOptions;
 	/**
 	 * Bouton de validation méthode de payement
@@ -271,7 +271,7 @@ public class CheckoutPage extends _BasePage {
 	 */
 	public void fillBillingAddress(String street, String city, String postcode, String phone)
 			throws PageObjectException {
-		try {
+//		try {
 			fluentWait(billAdrSaveBtn);
 			if (isElementPresent(selectBillingAddress)) {
 				getSelect(selectBillingAddress).selectByIndex(1);
@@ -290,9 +290,9 @@ public class CheckoutPage extends _BasePage {
 				log.info("Adresse de facturation renseignée");
 			}
 			billAdrSaveBtn.click();
-		} catch (Exception e) {
-			throw new PageObjectException(this.driver,"Il y a eu un problème avec le formulaire d'adresse de facturation", e);
-		}
+//		} catch (Exception e) {
+//			throw new PageObjectException(this.driver,"Il y a eu un problème avec le formulaire d'adresse de facturation", e);
+//		}
 	}
 
 	/**
@@ -316,7 +316,7 @@ public class CheckoutPage extends _BasePage {
 	 */
 	public void fillBillingAddressAsGuest(String firstname, String lastname, String email, String street, String city,
 			String postcode, String phone) throws PageObjectException {
-		try {
+//		try {
 			fluentWait(billAdrSaveBtn);
 
 			getSelect(prefixInput).selectByIndex(1);
@@ -338,9 +338,9 @@ public class CheckoutPage extends _BasePage {
 			log.info("Adresse de facturation renseignée pour utilisateur invité");
 
 			billAdrSaveBtn.click();
-		} catch (Exception e) {
-			throw new PageObjectException(this.driver,"Il y a eu un problème avec le formulaire d'adresse de facturation", e);
-		}
+//		} catch (Exception e) {
+//			throw new PageObjectException(this.driver,"Il y a eu un problème avec le formulaire d'adresse de facturation", e);
+//		}
 	}
 	
 	public void fillShippingAddress()
@@ -365,7 +365,7 @@ public class CheckoutPage extends _BasePage {
 			
 			fluentWait(shipSaveBtn);
 			if (chooseShip.size() > 1)
-				chooseShip.get(2).click();
+				chooseShip.get(1).click();
 			shipSaveBtn.click();
 			log.info("Moyen de livraison choisi");
 		} catch (Exception e) {
@@ -383,7 +383,7 @@ public class CheckoutPage extends _BasePage {
 		try {
 			fluentWait(paySaveBtn, 1, 10);
 			if (payOptions.size() > 0) {
-				payOptions.get(2).click();
+				payOptions.get(1).click();
 			}
 			paySaveBtn.click();
 			log.info("Moyen de payement choisi");

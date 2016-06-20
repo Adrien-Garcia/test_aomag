@@ -1,4 +1,4 @@
-package tests.test_aomagento.COMPUTEC.PO;
+package tests.test_aomagento.BRANDER.PO;
 
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -110,6 +110,7 @@ public class _BasePage {
 	 * @throws PageObjectException
 	 */
 	public HomePage goToHomePage() throws PageObjectException {
+		fluentWait(logoHome);
 		logoHome.click();
 		return new HomePage(driver);
 	}
@@ -132,7 +133,7 @@ public class _BasePage {
 	public boolean isUserLoggedIn() {
 		if (isElementPresent(logoutLink)) {
 			return true;
-
+			
 		} else {
 			return false;
 		}

@@ -24,12 +24,12 @@ import base.PageObjectException;
  * @version 1.0
  * @since 2015-04-25
  */
-public class CatalogPageRwd extends _BasePageRwd {
+public class CatalogSearchRwd extends _BasePageRwd {
 
 	/**
 	 * Logger pour cette classe
 	 */
-	private static Log log = LogFactory.getLog(CatalogPageRwd.class);
+	private static Log log = LogFactory.getLog(CatalogSearchRwd.class);
 
 	// Elements du DOM
 
@@ -107,7 +107,7 @@ public class CatalogPageRwd extends _BasePageRwd {
 	 *            WebDriver Selenium
 	 * @throws PageObjectException
 	 */
-	public CatalogPageRwd(RemoteWebDriver _driver) throws PageObjectException {
+	public CatalogSearchRwd(RemoteWebDriver _driver) throws PageObjectException {
 		super(_driver);
 		PageFactory.initElements(driver, this);
 

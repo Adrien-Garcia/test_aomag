@@ -4,7 +4,7 @@ import base.ComplexReportFactory;
 import base.DesiredCapabilitiesTest;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.RWD.PO.AccountPageRwd;
-import tests.test_aomagento.RWD.PO.CatalogPageRwd;
+import tests.test_aomagento.RWD.PO.CatalogSearchRwd;
 import tests.test_aomagento.RWD.PO.HomePageRwd;
 import tests.test_aomagento.RWD.PO.SearchResultPageRwd;
 import tests.test_aomagento.RWD.PO.SignInPageRwd;

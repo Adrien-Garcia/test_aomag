@@ -5,7 +5,7 @@ import base.DesiredCapabilitiesTest;
 import base.DesiredCapabilitiesTestNG;
 import base.PageObjectException;
 import tests.test_aomagento.RWD.PO.AccountPageRwd;
-import tests.test_aomagento.RWD.PO.CatalogPageRwd;
+import tests.test_aomagento.RWD.PO.CatalogSearchRwd;
 import tests.test_aomagento.RWD.PO.ComparatorPageRwd;
 import tests.test_aomagento.RWD.PO.HomePageRwd;
 import tests.test_aomagento.RWD.PO.ProductPageRwd;
@@ -31,7 +31,7 @@ public class AjoutProduitComparateurRwd extends DesiredCapabilitiesTestNG {
 	SignInPageRwd signInPage;
 	AccountPageRwd accountPage;
 	WishlistPageRwd wishlistPage;
-	CatalogPageRwd catalogPage;
+	CatalogSearchRwd catalogPage;
 	ComparatorPageRwd comparatorPage;
 	ProductPageRwd productPage;
 	ShoppingCartPageRwd cartPage;

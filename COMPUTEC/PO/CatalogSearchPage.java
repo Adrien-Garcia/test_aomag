@@ -23,11 +23,11 @@ import base.PageObjectException;
  * @version 1.0
  * @since 2015-04-27
  */
-public class SearchResultPage extends _BasePage {
+public class CatalogSearchPage extends _BasePage {
 	/**
 	 * Logger pour cette classe
 	 */
-	private static Log log = LogFactory.getLog(SearchResultPage.class);
+	private static Log log = LogFactory.getLog(CatalogSearchPage.class);
 
 	// Elements du DOM
 
@@ -53,7 +53,7 @@ public class SearchResultPage extends _BasePage {
 	 *            WebDriver Selenium
 	 * @throws PageObjectException
 	 */
-	public SearchResultPage(RemoteWebDriver _driver) {
+	public CatalogSearchPage(RemoteWebDriver _driver) {
 		super(_driver);
 		PageFactory.initElements(this.driver, this);
 		fluentWait(searchResultBody);

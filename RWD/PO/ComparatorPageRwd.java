@@ -111,10 +111,10 @@ public class ComparatorPageRwd extends _BasePageRwd {
 	 * @return <b>CatalogPageRwd</b> Page catalogue appelant
 	 * @throws PageObjectException
 	 */
-	public CatalogPageRwd closeComparator() throws PageObjectException {
+	public CatalogSearchRwd closeComparator() throws PageObjectException {
 		try {
 			closeAllOtherWindows(driver, this.callingPageHandle);
-			return new CatalogPageRwd(driver);
+			return new CatalogSearchRwd(driver);
 		} catch (Exception e) {
 			throw new PageObjectException(this.driver,"La popup du comparateur ne s'est pas fermée", e);
 		}
