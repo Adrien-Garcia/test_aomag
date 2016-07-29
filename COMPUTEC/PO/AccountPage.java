@@ -76,7 +76,7 @@ public class AccountPage extends _BasePage {
 	/**
 	 * Checkbox inscription à la newsletter
 	 */
-	@FindBy(css = ".sel-subscribe-newsletter input")
+	@FindBy(css = ".sel-subscribe-newsletter")
 	private WebElement subscriptionCheckBox;
 
 	/**

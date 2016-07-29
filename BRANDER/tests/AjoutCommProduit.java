@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import base.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.Constant;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.BRANDER.PO.AccountPage;
 import tests.test_aomagento.BRANDER.PO.CatalogPage;
@@ -27,8 +27,8 @@ public class AjoutCommProduit extends DesiredCapabilitiesTestNG {
 		homePage = new HomePage(driver);
 
 		// On va sur un produit d'une catégorie du catalogue
-		catalogPage = homePage.goToCategory(Constant.Category1);
-		productPage = catalogPage.clickOnProduct(Constant.Product1);
+		catalogPage = homePage.goToCategory(1);
+		productPage = catalogPage.clickOnProduct(0);
 
 		// On lui ajoute un commentaire
 		productPage.addReviewToProduct(Constant.Review, Constant.ReviewTitle, Constant.Firstname);

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="mg_aomagento thème BRANDER" verbose="1">
+	<listeners>
+		<listener class-name="base.ExtentReporterNG" />
+		<listener class-name="base.TestNGListener" />
+	</listeners>
+	<test name="Chrome/Local">
+		<parameter name="browser" value="chrome"></parameter>
+		<parameter name="version" value=""></parameter>
+		<parameter name="plateform" value=""></parameter>
+		<parameter name="hub" value=""></parameter>
+		<classes>
+<!-- 			<class name="tests.test_aomagento.BRANDER.tests.AccesPanier" /> -->
+<!-- 			<class name="tests.test_aomagento.BRANDER.tests.AjoutProduitWishlist" /> -->
+<!-- 			<class name="tests.test_aomagento.BRANDER.tests.Commande" /> -->
+<!-- 			<class name="tests.test_aomagento.BRANDER.tests.ConnectionClient" /> -->
+<!-- 			<class name="tests.test_aomagento.BRANDER.tests.LiensMenu" /> -->
+<!-- 			<class name="tests.test_aomagento.BRANDER.tests.ModifCompte" /> -->
+<!-- 			<class name="tests.test_aomagento.BRANDER.tests.ModifQtePanier" /> -->
+<!-- 			<class name="tests.test_aomagento.BRANDER.tests.RechercheTexte" /> -->
+			<class name="tests.test_aomagento.BRANDER.tests.SupprProduitPanier" />
+		</classes>
+<!-- 		<packages> -->
+<!-- 			<package name="tests.test_aomagento.BRANDER.tests.*"> </package> -->
+<!-- 		</packages> -->
+	</test>
+<!-- 	<test name="IE9/Windows"> -->
+<!-- 		<parameter name="browser" value="internet explorer"></parameter> -->
+<!-- 		<parameter name="version" value="9"></parameter> -->
+<!-- 		<parameter name="plateform" value="WINDOWS 7"></parameter> -->
+<!-- 		<parameter name="hub" value="http://192.168.69.55:4445/wd/hub"></parameter> -->
+<!-- 		<packages> -->
+<!-- 			<package name="tests.test_aomagento.BRANDER.tests.*"></package> -->
+<!-- 		</packages> -->
+<!-- 	</test> -->
+<!-- 	<test name="IE10/Windows"> -->
+<!-- 		<parameter name="browser" value="internet explorer"></parameter> -->
+<!-- 		<parameter name="version" value="10"></parameter> -->
+<!-- 		<parameter name="plateform" value="WINDOWS 7"></parameter> -->
+<!-- 		<parameter name="hub" value="http://192.168.69.56:4445/wd/hub"></parameter> -->
+<!-- 		<packages> -->
+<!-- 			<package name="tests.test_aomagento.BRANDER.tests"> -->
+<!-- 			</package> -->
+<!-- 		</packages> -->
+<!-- 	</test> -->
+<!-- 	<test name="EDGE/Windows"> -->
+<!-- 		<parameter name="browser" value="internet explorer"></parameter> -->
+<!-- 		<parameter name="version" value="20"></parameter> -->
+<!-- 		<parameter name="plateform" value="WINDOWS"></parameter> -->
+<!-- 		<parameter name="hub" value="http://192.168.69.141:4447/wd/hub"></parameter> -->
+<!-- 		<packages> -->
+<!-- 			<package name="tests.test_aomagento.BRANDER.tests"></package> -->
+<!-- 		</packages> -->
+<!-- 	</test> -->
+<!-- 	<test name="FIREFOX/Windows"> -->
+<!-- 		<parameter name="browser" value="firefox"></parameter> -->
+<!-- 		<parameter name="version" value="43"></parameter> -->
+<!-- 		<parameter name="plateform" value="WINDOWS 7"></parameter> -->
+<!-- 		<parameter name="hub" value="http://192.168.69.56:4449/wd/hub"></parameter> -->
+<!-- 		<classes> -->
+<!-- 			<class name="tests.test_aomagento.BRANDER.tests.AjoutProduitPanier" /> -->
+<!-- 		</classes> -->
+<!-- 		<packages> -->
+<!-- 			<package name="tests.test_aomagento.BRANDER.tests"> -->
+<!-- 			</package> -->
+<!-- 		</packages> -->
+<!-- 	</test> -->
+<!-- 	<test name="CHROME/Windows"> -->
+<!-- 		<parameter name="browser" value="chrome"></parameter> -->
+<!-- 		<parameter name="version" value="46"></parameter> -->
+<!-- 		<parameter name="plateform" value="WINDOWS"></parameter> -->
+<!-- 		<parameter name="hub" value="http://192.168.69.141:4446/wd/hub"></parameter> -->
+<!-- 		<packages> -->
+<!-- 			<package name="tests.test_aomagento.BRANDER.tests"></package> -->
+<!-- 		</packages> -->
+<!-- 	</test> -->
+</suite>

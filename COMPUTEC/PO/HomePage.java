@@ -61,8 +61,7 @@ public class HomePage extends _BasePage {
 	 */
 	public HomePage(RemoteWebDriver _driver) throws PageObjectException {
 		super(_driver);
-//		driver.get("http://aomagento.jerivoalan.jetpulp.dev/" + "computec/");
-		driver.get("http://cls.preprod.addonline.biz/");
+		driver.get("http://aomagento.jerivoalan.jetpulp.dev/" + "computec/");
 		PageFactory.initElements(this.driver, this);
 		
 		if (!isElementPresent(homeBody)) {
@@ -82,7 +81,6 @@ public class HomePage extends _BasePage {
 		try {
 			Actions action = new Actions(driver);
 			action.moveToElement(menuL0.get(nCategory)).click().perform();
-			//menuL0.get(nCategory).click();
 			log.info("Catégorie " + nCategory + " clickée, accés à sa page...");
 			return new CatalogPage(driver);
 		} catch (Exception e) {
@@ -160,8 +158,6 @@ public class HomePage extends _BasePage {
 		if (menuL0.size() == 0)
 			throw new PageObjectException(this.driver,"Le menu n'est pas accessible ou n'existe pas");
 		else {
-			Actions action = new Actions(driver);
-			action.moveToElement(menuL0.get(nCategory)).perform();
 			String nameOfCategory = menuL0.get(nCategory).getText();
 			log.info(" Catégorie " + nCategory + " = " + nameOfCategory);
 			return nameOfCategory;

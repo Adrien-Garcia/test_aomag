@@ -7,7 +7,8 @@ import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import base.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.pageObjectTools;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.BRANDER.PO.AccountPage;
 import tests.test_aomagento.BRANDER.PO.CatalogPage;
@@ -26,18 +27,18 @@ public class CouponPanier extends DesiredCapabilitiesTestNG {
 	CatalogPage catalogPage;
 	ProductPage productPage;
 	ShoppingCartPage cartPage;
+	
+	pageObjectTools pageTools;
 
 	@Test(description = "Application coupon dans le panier")
 	public void testCouponPanierRwd() throws Exception {
 		homePage = new HomePage(driver);
 
 		// On connecte l'utilisateur s'il ne l'est pas
-		if (!homePage.isUserLoggedIn()) {
-			signInPage = homePage.clickConnectionClient();
-			accountPage = signInPage.SignInAction(Constant.Email, Constant.Password);
-			Assert.assertTrue(accountPage.isUserLoggedIn());
-			homePage = accountPage.goToHomePage();
-		}
+		pageTools = new pageObjectTools();
+		accountPage=pageTools.connectionClient(homePage.getDriver(), Constant.Email, Constant.Password);
+		
+		homePage = accountPage.goToHomePage();
 		
 		// On vide le panier ce qui permet d'annuler une quelconque remise si déjà appiquee
 		cartPage = homePage.goToCart();
@@ -45,8 +46,8 @@ public class CouponPanier extends DesiredCapabilitiesTestNG {
 		homePage = cartPage.goToHomePage();
 
 		// On ajoute un produit au panier
-		catalogPage = homePage.goToCategory(Constant.Category2);
-		productPage = catalogPage.clickOnProduct(Constant.Product1);
+		catalogPage = homePage.goToCategory(1);
+		productPage = catalogPage.clickOnProduct(0);
 		cartPage = productPage.addProductToCart(4);
 
 		// On recupere le prix ttc avant remise

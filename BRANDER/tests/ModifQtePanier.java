@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import base.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.Constant;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.BRANDER.PO.AccountPage;
 import tests.test_aomagento.BRANDER.PO.CatalogPage;
@@ -29,8 +29,8 @@ public class ModifQtePanier extends DesiredCapabilitiesTestNG {
 
 		// On rajoute un produit avec une quantité de 4 (peu importe la quantité
 		// de base)
-		catalogPage = homePage.goToCategory(Constant.Category2);
-		productPage = catalogPage.clickOnProduct(Constant.Product1);
+		catalogPage = homePage.goToCategory(1);
+		productPage = catalogPage.clickOnProduct(0);
 		String produit1 = productPage.getProductSku();
 		cartPage = productPage.addProductToCart(4);
 

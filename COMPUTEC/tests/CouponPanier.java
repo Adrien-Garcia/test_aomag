@@ -1,6 +1,7 @@
 package tests.test_aomagento.COMPUTEC.tests;
 
-import base.Constant;
+import tests.test_aomagento.COMPUTEC.utilitaries.Constant;
+import tests.test_aomagento.COMPUTEC.utilitaries.pageObjectTools;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.COMPUTEC.PO.AccountPage;
 import tests.test_aomagento.COMPUTEC.PO.CatalogPage;
@@ -27,6 +28,8 @@ public class CouponPanier extends DesiredCapabilitiesTestNG {
 	ProductPage productPage;
 	ShoppingCartPage cartPage;
 
+	pageObjectTools pageTools;
+
 	@Test(description = "Application coupon dans le panier")
 	public void testCouponPanierRwd() throws Exception {
 		log.info(":: Test COMPUTEC :: application coupon au panier ::");
@@ -34,12 +37,10 @@ public class CouponPanier extends DesiredCapabilitiesTestNG {
 		homePage = new HomePage(driver);
 
 		// On connecte l'utilisateur s'il ne l'est pas
-		if (!homePage.isUserLoggedIn()) {
-			signInPage = homePage.clickConnectionClient();
-			accountPage = signInPage.SignInAction(Constant.Email, Constant.Password);
-			Assert.assertTrue(accountPage.isUserLoggedIn());
-			homePage = accountPage.goToHomePage();
-		}
+		pageTools = new pageObjectTools();
+		accountPage=pageTools.connectionClient(homePage.getDriver(), Constant.Email, Constant.Password);
+		homePage = accountPage.goToHomePage();
+
 		// On vide le panier ce qui permet d'annuler une quelconque remise si déjà appiquee
 		cartPage = homePage.goToCart();
 		cartPage.emptyCart();

@@ -5,7 +5,8 @@ import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import base.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.pageObjectTools;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.BRANDER.PO.AccountPage;
 import tests.test_aomagento.BRANDER.PO.CatalogPage;
@@ -18,7 +19,7 @@ import tests.test_aomagento.BRANDER.PO.WishlistPage;
 
 public class AjoutProduitComparateur extends DesiredCapabilitiesTestNG {
 	private static Log log = LogFactory.getLog(AjoutProduitComparateur.class);
-	
+
 	HomePage homePage;
 	SignInPage signInPage;
 	AccountPage accountPage;
@@ -28,29 +29,27 @@ public class AjoutProduitComparateur extends DesiredCapabilitiesTestNG {
 	ProductPage productPage;
 	ShoppingCartPage cartPage;
 
+	pageObjectTools pageTools;
+
 	@Test(description="Ajout d'un produit au comparateur")
 	public void testAjoutProduitComparateur() throws Exception {
 		homePage = new HomePage(driver);
 
-		if (!homePage.isUserLoggedIn()) {
-			signInPage = homePage.clickConnectionClient();
-			accountPage = signInPage.SignInAction(Constant.Email, Constant.Password);
-			Assert.assertTrue(accountPage.isUserLoggedIn());
-		} else {
-			accountPage=homePage.goToAccountPage();
-		}
+		pageTools = new pageObjectTools();
+		accountPage=pageTools.connectionClient(homePage.getDriver(), Constant.Email, Constant.Password);
 
 		// On accéde à une catégorie du shop
-		catalogPage = homePage.goToCategory(Constant.Category1);
+		catalogPage = homePage.goToCategory(1);
 
 		// On ajoute 2 produits au comparateur directement du shop, on instancie
 		// leur nom dans deux variables
-		productPage = catalogPage.clickOnProduct(Constant.Product1);
+		productPage = catalogPage.clickOnProduct(0);
 		productPage.addProductToComparator();
 		String produit1 = productPage.getProductName();
+		
 		homePage = productPage.goToHomePage();
-		catalogPage = homePage.goToCategory(Constant.Category1);
-		productPage = catalogPage.clickOnProduct(Constant.Product2);
+		catalogPage = homePage.goToCategory(1);
+		productPage = catalogPage.clickOnProduct(1);
 		productPage.addProductToComparator();
 		String produit2 = productPage.getProductName();
 

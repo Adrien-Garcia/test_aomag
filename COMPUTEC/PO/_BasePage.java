@@ -113,6 +113,10 @@ public class _BasePage {
 		logoHome.click();
 		return new HomePage(driver);
 	}
+	
+	public RemoteWebDriver getDriver(){
+		return this.driver;
+	}
 
 	/**
 	 * Test si le message succés est affiché
@@ -169,6 +173,8 @@ public class _BasePage {
 	 * @return <b>boolean</b>
 	 */
 	public boolean isCartEmpty() {
+		cartLink.click();
+		checkPageIsReady();
 		if (cartLink.getText().contains("(0)"))
 			return true;
 		else

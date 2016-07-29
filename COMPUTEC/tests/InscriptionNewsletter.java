@@ -6,8 +6,9 @@ import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import base.Constant;
+import tests.test_aomagento.COMPUTEC.utilitaries.Constant;
 import base.DesiredCapabilitiesTestNG;
+import tests.test_aomagento.COMPUTEC.utilitaries.pageObjectTools;
 import tests.test_aomagento.COMPUTEC.PO.AccountPage;
 import tests.test_aomagento.COMPUTEC.PO.CatalogPage;
 import tests.test_aomagento.COMPUTEC.PO.HomePage;
@@ -21,19 +22,16 @@ public class InscriptionNewsletter extends DesiredCapabilitiesTestNG {
 	AccountPage accountPage;
 	CatalogPage catalogPage;
 	ProductPage productPage;
+	
+	pageObjectTools pageTools;
 
 	@Test(description = "Inscription à la newsletter", priority = 0)
 	public void testInscriptionNewsletterRwd() throws Exception {
 		log.info(":: Test COMPUTEC:: inscription à la newsletter ::");
 		homePage = new HomePage(driver);
 
-		if (!homePage.isUserLoggedIn()) {
-			signInPage = homePage.clickConnectionClient();
-			accountPage = signInPage.SignInAction(Constant.Email, Constant.Password);
-			Assert.assertTrue(accountPage.isUserLoggedIn());
-		} else{
-			accountPage = homePage.goToAccountPage();
-		}
+		pageTools = new pageObjectTools();
+		accountPage=pageTools.connectionClient(homePage.getDriver(), Constant.Email, Constant.Password);
 
 		accountPage.subscribeToNewsletter();
 		Assert.assertTrue(accountPage.isUserSubscribedToNewsletter());
@@ -46,13 +44,9 @@ public class InscriptionNewsletter extends DesiredCapabilitiesTestNG {
 		log.info(":: Test COMPUTEC :: desinscription à la newsletter ::");
 		homePage = new HomePage(driver);
 
-		if (!homePage.isUserLoggedIn()) {
-			signInPage = homePage.clickConnectionClient();
-			accountPage = signInPage.SignInAction(Constant.Email, Constant.Password);
-			Assert.assertTrue(accountPage.isUserLoggedIn());
-		} else {
-			accountPage = homePage.goToAccountPage();
-		}
+		pageTools = new pageObjectTools();
+		accountPage=pageTools.connectionClient(homePage.getDriver(), Constant.Email, Constant.Password);
+		
 		accountPage.unsubscribeToNewsletter();
 		Assert.assertFalse(accountPage.isUserSubscribedToNewsletter());
 

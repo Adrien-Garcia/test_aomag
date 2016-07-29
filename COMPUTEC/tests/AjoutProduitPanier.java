@@ -25,7 +25,7 @@ public class AjoutProduitPanier extends DesiredCapabilitiesTestNG {
 
 	@Test(description="Ajout d'un produit au panier")
 	public void testAjoutProduitPanier() throws Exception {
-		log.info(":: Test Thème Rwd :: ajout d'un produit au panier ::");
+		log.info(":: Test COMPUTEC :: ajout d'un produit au panier ::");
 		homePage = new HomePage(driver);
 		
 		// On va au panier pour recuperer le nombre de produits presents avant

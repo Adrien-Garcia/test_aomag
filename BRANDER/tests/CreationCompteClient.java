@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import base.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.Constant;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.BRANDER.PO.AccountPage;
 import tests.test_aomagento.BRANDER.PO.HomePage;

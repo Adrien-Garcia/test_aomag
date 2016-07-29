@@ -1,6 +1,7 @@
 package tests.test_aomagento.COMPUTEC.tests;
 
-import base.Constant;
+import tests.test_aomagento.COMPUTEC.utilitaries.Constant;
+import tests.test_aomagento.COMPUTEC.utilitaries.pageObjectTools;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.COMPUTEC.PO.AccountPage;
 import tests.test_aomagento.COMPUTEC.PO.CatalogPage;
@@ -25,20 +26,17 @@ public class AjoutProduitWishlist extends DesiredCapabilitiesTestNG {
 	CatalogPage catalogPage;
 	ProductPage productPage;
 	ShoppingCartPage cartPage;
+	
+	pageObjectTools pageTools;
 
 	@Test(description="Ajout produit à la wishlist ")
 	public void testAjoutProduitWishlist() throws Exception {
-		log.info(":: Test Thème Rwd :: ajout d'un produit à la wishlist ::");
+		log.info(":: Test COMPUTEC :: ajout d'un produit à la wishlist ::");
 		homePage = new HomePage(driver);
 
 		// On connecte un utilisateur
-		if (!homePage.isUserLoggedIn()) {
-			signInPage = homePage.clickConnectionClient();
-			accountPage = signInPage.SignInAction(Constant.Email, Constant.Password);
-			Assert.assertTrue(accountPage.isUserLoggedIn());
-		} else {
-			accountPage=homePage.goToAccountPage();
-		}
+		pageTools = new pageObjectTools();
+		accountPage=pageTools.connectionClient(homePage.getDriver(), Constant.Email, Constant.Password);
 		
 		// On va à la liste d'envie afin de la vider
 		wishlistPage = accountPage.goToWishlist();

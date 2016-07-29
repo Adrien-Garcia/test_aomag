@@ -5,7 +5,8 @@ import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import base.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.pageObjectTools;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.BRANDER.PO.AccountEditPage;
 import tests.test_aomagento.BRANDER.PO.AccountPage;
@@ -21,19 +22,16 @@ public class ModifCompte extends DesiredCapabilitiesTestNG {
 	AccountPage accountPage;
 	AccountEditPage accountInfoPage;
 	AddressBookPage accountAdressesPage;
+	
+	pageObjectTools pageTools;
 
 	@Test(description="Modification d'un compte client (changement coordonnées)", priority=0)
 	public void testModificationInfosCompteRwd() throws Exception {
 		homePage = new HomePage(driver);
 
 		// On connecte l'utilisateur
-		if (!homePage.isUserLoggedIn()) {
-			signInPage = homePage.clickConnectionClient();
-			accountPage = signInPage.SignInAction(Constant.Email, Constant.Password);
-			Assert.assertTrue(accountPage.isUserLoggedIn());
-		} else {
-			accountPage = homePage.goToAccountPage();
-		}
+		pageTools = new pageObjectTools();
+		accountPage=pageTools.connectionClient(homePage.getDriver(), Constant.Email, Constant.Password);
 
 		// On accéde aux infos
 		accountInfoPage = accountPage.goToInfoAccount();
@@ -49,13 +47,8 @@ public class ModifCompte extends DesiredCapabilitiesTestNG {
 		homePage = new HomePage(driver);
 
 		// On connecte l'utilisateur
-		if (!homePage.isUserLoggedIn()) {
-			signInPage = homePage.clickConnectionClient();
-			accountPage = signInPage.SignInAction(Constant.Email, Constant.Password);
-			Assert.assertTrue(accountPage.isUserLoggedIn());
-		}else{
-			accountPage = homePage.goToAccountPage();
-		}
+		pageTools = new pageObjectTools();
+		accountPage=pageTools.connectionClient(homePage.getDriver(), Constant.Email, Constant.Password);
 
 		// On accéde aux infos
 		accountAdressesPage = accountPage.goToAddressMenuLink();
@@ -70,13 +63,8 @@ public class ModifCompte extends DesiredCapabilitiesTestNG {
 		homePage = new HomePage(driver);
 
 		// On connecte l'utilisateur
-		if (!homePage.isUserLoggedIn()) {
-			signInPage = homePage.clickConnectionClient();
-			accountPage = signInPage.SignInAction(Constant.Email, Constant.Password);
-			Assert.assertTrue(accountPage.isUserLoggedIn());
-		}else{
-			accountPage = homePage.goToAccountPage();
-		}
+		pageTools = new pageObjectTools();
+		accountPage=pageTools.connectionClient(homePage.getDriver(), Constant.Email, Constant.Password);
 
 		// On accéde aux infos et on change le mdp
 		accountInfoPage = accountPage.goToInfoAccount();

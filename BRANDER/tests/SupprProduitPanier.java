@@ -6,7 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import base.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.Constant;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.BRANDER.PO.AccountPage;
 import tests.test_aomagento.BRANDER.PO.CatalogPage;
@@ -39,14 +39,14 @@ public class SupprProduitPanier extends DesiredCapabilitiesTestNG {
 
 		// On ajoute un produit à partir du catalogue
 		// Veiller à ce que les sku soient bien différent
-		catalogPage = homePage.goToCategory(Constant.Category1);
-		productPage = catalogPage.clickOnProduct(Constant.Product1);
+		catalogPage = homePage.goToCategory(1);
+		productPage = catalogPage.clickOnProduct(0);
 		cartPage = productPage.addProductToCart(1);
 
 		// On en ajoute un autre à partir de la page produit
 		homePage = cartPage.goToHomePage();
-		catalogPage = homePage.goToCategory(Constant.Category2);
-		productPage = catalogPage.clickOnProduct(Constant.Product1);
+		catalogPage = homePage.goToCategory(1);
+		productPage = catalogPage.clickOnProduct(0);
 		// On recupere son sku
 		String idProduct2 = productPage.getProductSku();
 		cartPage = productPage.addProductToCart(2);
@@ -65,26 +65,26 @@ public class SupprProduitPanier extends DesiredCapabilitiesTestNG {
 
 	}
 
-//	@Test(description="Vidage complet du panier")
-//	public void testViderPanier() throws Exception {
-//		// on ajoute unproduit dans le panier
-//		homePage = new HomePage(driver);
-//		catalogPage = homePage.goToCategory(Constant.Category1);
-//		productPage = catalogPage.clickOnProduct(Constant.Product1);
-//		cartPage = productPage.addProductToCart(1);
-//		// Puis un deuxième
-//		homePage = cartPage.goToHomePage();
-//		catalogPage = homePage.goToCategory(Constant.Category2);
-//		productPage = catalogPage.clickOnProduct(Constant.Product1);
-//		cartPage = productPage.addProductToCart(1);
-//
-//		// On vide le panier
-//		cartPage.emptyCart();
-//
-//		// On test que le panier est vide
-//		Assert.assertTrue(cartPage.getNumberOfProductsInCart() == 0);
-//		Assert.assertTrue(cartPage.isCartEmpty());
-//
-//	}
+	@Test(description="Vidage complet du panier")
+	public void testViderPanier() throws Exception {
+		// on ajoute unproduit dans le panier
+		homePage = new HomePage(driver);
+		catalogPage = homePage.goToCategory(1);
+		productPage = catalogPage.clickOnProduct(0);
+		cartPage = productPage.addProductToCart(1);
+		// Puis un deuxième
+		homePage = cartPage.goToHomePage();
+		catalogPage = homePage.goToCategory(1);
+		productPage = catalogPage.clickOnProduct(1);
+		cartPage = productPage.addProductToCart(1);
+
+		// On vide le panier
+		cartPage.emptyCart();
+
+		// On test que le panier est vide
+		Assert.assertTrue(cartPage.getNumberOfProductsInCart() == 0);
+		Assert.assertTrue(cartPage.isCartEmpty());
+
+	}
 
 }

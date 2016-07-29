@@ -7,7 +7,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import base.ComplexReportFactory;
-import base.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.Constant;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.BRANDER.PO.AccountPage;
 import tests.test_aomagento.BRANDER.PO.CatalogPage;
@@ -36,8 +36,8 @@ public class Commande extends DesiredCapabilitiesTestNG {
 			homePage.logOutUser();
 
 		// Click sur la premiere categorie : au premier niveau
-		catalogPage = homePage.goToCategory(Constant.Category1);
-		productPage = catalogPage.clickOnProduct(Constant.Product1);
+		catalogPage = homePage.goToCategory(1);
+		productPage = catalogPage.clickOnProduct(0);
 		cartPage = productPage.addProductToCart(1);
 		testReporter.log(LogStatus.PASS, "Ajout d'un produit au panier");
 
@@ -89,8 +89,8 @@ public class Commande extends DesiredCapabilitiesTestNG {
 		if (homePage.isUserLoggedIn())
 			homePage.logOutUser();
 
-		catalogPage = homePage.goToCategory(Constant.Category1);
-		productPage = catalogPage.clickOnProduct(Constant.Product1);
+		catalogPage = homePage.goToCategory(1);
+		productPage = catalogPage.clickOnProduct(0);
 		cartPage = productPage.addProductToCart(1);
 		testReporter.log(LogStatus.PASS, "Ajout d'un produit au panier");
 

@@ -19,8 +19,10 @@ public class RechercheTexte extends DesiredCapabilitiesTestNG {
 	HomePage homePage;
 	CatalogSearchPage searchResultPage;
 	
-	@Test(description="Recherche Texte", dataProvider = "search")
-	public void testRechercheTexteRwd(String searchFor) throws Exception {
+	String searchFor = "apple";
+	
+	@Test(description="Recherche Texte")
+	public void testRechercheTexteRwd() throws Exception {
 		ExtentTest testReporter = ComplexReportFactory.getTest();
 //		testReporter.log(LogStatus.INFO, ":: Test lancé :: Recherche texte :: "+ searchFor);
 		

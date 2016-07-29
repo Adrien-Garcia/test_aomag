@@ -6,7 +6,8 @@ import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import base.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.pageObjectTools;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.BRANDER.PO.AccountPage;
 import tests.test_aomagento.BRANDER.PO.CatalogPage;
@@ -21,34 +22,27 @@ public class InscriptionNewsletter extends DesiredCapabilitiesTestNG {
 	AccountPage accountPage;
 	CatalogPage catalogPage;
 	ProductPage productPage;
+	
+	pageObjectTools pageTools;
 
-	@Test(description = "Inscription à la newsletter", priority = 0)
+	@Test(description = "Inscription à la newsletter")
 	public void testInscriptionNewsletterRwd() throws Exception {
 		homePage = new HomePage(driver);
 
-		if (!homePage.isUserLoggedIn()) {
-			signInPage = homePage.clickConnectionClient();
-			accountPage = signInPage.SignInAction(Constant.Email, Constant.Password);
-			Assert.assertTrue(accountPage.isUserLoggedIn());
-		} else{
-			accountPage = homePage.goToAccountPage();
-		}
+		pageTools = new pageObjectTools();
+		accountPage=pageTools.connectionClient(homePage.getDriver(), Constant.Email, Constant.Password);
 
 		accountPage.subscribeToNewsletter();
 		Assert.assertTrue(accountPage.isUserSubscribedToNewsletter());
 	}
 
-	@Test(description = "Désinscription à la newsletter", dependsOnMethods = { "testInscriptionNewsletterRwd" })
+	@Test(description = "Désinscription à la newsletter")
 	public void testDesinscriptionNewsletterRwd() throws Exception {
 		homePage = new HomePage(driver);
 
-		if (!homePage.isUserLoggedIn()) {
-			signInPage = homePage.clickConnectionClient();
-			accountPage = signInPage.SignInAction(Constant.Email, Constant.Password);
-			Assert.assertTrue(accountPage.isUserLoggedIn());
-		} else {
-			accountPage = homePage.goToAccountPage();
-		}
+		pageTools = new pageObjectTools();
+		accountPage=pageTools.connectionClient(homePage.getDriver(), Constant.Email, Constant.Password);
+		
 		accountPage.unsubscribeToNewsletter();
 		Assert.assertFalse(accountPage.isUserSubscribedToNewsletter());
 	}
