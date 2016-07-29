@@ -1,6 +1,10 @@
 package tests.test_aomagento.COMPUTEC.tests;
 
-import base.Constant;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.COMPUTEC.PO.AccountPage;
 import tests.test_aomagento.COMPUTEC.PO.CatalogPage;
@@ -10,15 +14,12 @@ import tests.test_aomagento.COMPUTEC.PO.ProductPage;
 import tests.test_aomagento.COMPUTEC.PO.ShoppingCartPage;
 import tests.test_aomagento.COMPUTEC.PO.SignInPage;
 import tests.test_aomagento.COMPUTEC.PO.WishlistPage;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import tests.test_aomagento.COMPUTEC.utilitaries.Constant;
+import tests.test_aomagento.COMPUTEC.utilitaries.pageObjectTools;
 
 public class AjoutProduitComparateur extends DesiredCapabilitiesTestNG {
 	private static Log log = LogFactory.getLog(AjoutProduitComparateur.class);
-	
+
 	HomePage homePage;
 	SignInPage signInPage;
 	AccountPage accountPage;
@@ -28,25 +29,24 @@ public class AjoutProduitComparateur extends DesiredCapabilitiesTestNG {
 	ProductPage productPage;
 	ShoppingCartPage cartPage;
 
+	pageObjectTools pageTools;
+
 	@Test(description="Ajout d'un produit au comparateur")
 	public void testAjoutProduitComparateur() throws Exception {
-		log.info(":: Test Thème Rwd :: ajout produits au comparateur ::");
+		log.info(":: Test COMPUTEC :: ajout produits au comparateur ::");
 		homePage = new HomePage(driver);
 
-		if (!homePage.isUserLoggedIn()) {
-			signInPage = homePage.clickConnectionClient();
-			accountPage = signInPage.SignInAction(Constant.Email, Constant.Password);
-			Assert.assertTrue(accountPage.isUserLoggedIn());
-		} else {
-			accountPage=homePage.goToAccountPage();
-		}
+		pageTools = new pageObjectTools();
+		accountPage=pageTools.connectionClient(homePage.getDriver(), Constant.Email, Constant.Password);
 
 		// On accéde à une catégorie du shop
 		catalogPage = homePage.goToCategory(0);
 
 		// On vide le comparateur pour le test
-		comparatorPage = catalogPage.openComparator();
-		comparatorPage.emptyComparator();
+		if (catalogPage.getNumberProductsInComparator()>0){
+			comparatorPage = catalogPage.openComparator();
+			comparatorPage.emptyComparator();
+		}
 		// On retourne à la catégorie précedente
 		comparatorPage.goToCategory(0);
 

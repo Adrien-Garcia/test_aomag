@@ -34,5 +34,4 @@ public class RechercheTexte extends DesiredCapabilitiesTestNG {
 		
 		Assert.assertTrue(searchResultPage.getH1Title().toLowerCase().contains(searchFor.toLowerCase()));
 	}
-
 }

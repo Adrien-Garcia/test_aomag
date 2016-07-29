@@ -5,7 +5,8 @@ import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import base.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.Constant;
+import tests.test_aomagento.BRANDER.utilitaries.pageObjectTools;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.BRANDER.PO.AccountPage;
 import tests.test_aomagento.BRANDER.PO.HomePage;
@@ -18,17 +19,14 @@ public class ConnectionClient extends DesiredCapabilitiesTestNG {
 	SignInPage signInPage;
 	AccountPage accountPage;
 
+	pageObjectTools pageTools;
 
 	@Test(description="Connection client")
 	public void testConnectionClient() throws Exception {
 		homePage = new HomePage(driver);
 
-		// On test si l'utilisateur n'est pas déjà connecté
-		if (homePage.isUserLoggedIn()) {
-			homePage.logOutUser();
-		} 
-		signInPage = homePage.clickConnectionClient();
-		accountPage = signInPage.SignInAction(Constant.Email, Constant.Password);
+		pageTools = new pageObjectTools();
+		accountPage=pageTools.connectionClient(homePage.getDriver(), Constant.Email, Constant.Password);
 		Assert.assertTrue(accountPage.isUserLoggedIn());
 	}
 

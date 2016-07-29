@@ -137,18 +137,20 @@ public class CatalogPage extends _BasePage {
 	 *            numéro du produit qu'on veut ajouter à la wishlist
 	 * @return page de la wishlist
 	 * @throws PageObjectException
+	 * @throws InterruptedException 
 	 */
-	public WishlistPage addProductToWishlist(int nProduit) throws PageObjectException {
+	public WishlistPage addProductToWishlist(int nProduit) throws PageObjectException, InterruptedException {
 		if (itemProducts.size() > 0) {
-			try {
+//			try {
 				Actions action = new Actions(driver);
-				action.moveToElement(productImage.get(nProduit)).perform();
-				addToWishlistLink.get(nProduit).click();
+				action.moveToElement(productImage.get(nProduit))
+				.moveToElement(addToWishlistLink.get(nProduit))
+				.click().build().perform();
 				return new WishlistPage(driver);
-			} catch (Exception e) {
-				throw new PageObjectException(this.driver,
-						"Le bouton d'ajout à la liste d'envie n'est pas accessible pour ce produit", e);
-			}
+//			} catch (Exception e) {
+//				throw new PageObjectException(this.driver,
+//						"Le bouton d'ajout à la liste d'envie n'est pas accessible pour ce produit", e);
+//			}
 		} else {
 			throw new PageObjectException(this.driver, "Aucun produit n'est présent ou visible sur cette page");
 		}

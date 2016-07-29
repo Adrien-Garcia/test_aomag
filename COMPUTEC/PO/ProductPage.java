@@ -183,7 +183,7 @@ public class ProductPage extends _BasePage {
 	 * @return page du panier
 	 * @throws PageObjectException
 	 */
-	public ShoppingCartPage addProductToCart(int quantity) throws PageObjectException {
+	public ShoppingCartPage addProductToCart(int quantity) throws Exception {
 		if (isProductInStock() == true){
 			String product = getProductName();
 			// On test si l'input qte est present
@@ -198,8 +198,9 @@ public class ProductPage extends _BasePage {
 				dropdownOption.selectByIndex(1);
 			}
 			addToCartBtn.click();
-			fluentWait(confirmBtn);
-			confirmBtn.click();
+			Thread.sleep(2000);
+			if (isElementPresent(confirmBtn))
+				confirmBtn.click();
 			log.info("Ajout du produit " + product + " au panier");
 			return new ShoppingCartPage(driver);
 		} else {
@@ -250,7 +251,7 @@ public class ProductPage extends _BasePage {
 	 * @throws PageObjectException
 	 */
 	public void addReviewToProduct(String review, String reviewTitle, String nickname) throws PageObjectException {
-		try {
+//		try {
 			if (isElementPresent(noReviewLink))
 				noReviewLink.click();
 			else
@@ -267,9 +268,9 @@ public class ProductPage extends _BasePage {
 			nicknameInput.sendKeys(nickname);
 			nicknameInput.submit();
 			log.info("Commentaire envoyé");
-		} catch (Exception e) {
-			throw new PageObjectException(this.driver,"L'envoi du commentaire a echoué", e);
-		}
+//		} catch (Exception e) {
+//			throw new PageObjectException(this.driver,"L'envoi du commentaire a echoué", e);
+//		}
 	}
 
 }

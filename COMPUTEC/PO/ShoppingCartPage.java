@@ -276,15 +276,18 @@ public class ShoppingCartPage extends _BasePage {
 	 * Vide le panier
 	 * 
 	 * @throws PageObjectException
+	 * @throws InterruptedException 
 	 */
-	public void emptyCart() throws PageObjectException {
+	public void emptyCart() throws PageObjectException, InterruptedException {
 		if (cartProducts.size()>0) {
-			List<WebElement> removeProducts = driver.findElementsByCssSelector(".sel-remove-item");
-			for (WebElement remove : removeProducts) {
-				if (remove.isDisplayed()){
-					waitToBeClickable(remove);
-					remove.click();
+			List<WebElement> removeProducts;
+			while (true) {
+				removeProducts = driver.findElementsByCssSelector(".sel-remove-item");
+				if (removeProducts.size() == 0){
+					break;
 				}
+				removeProducts.remove(0).click();
+				Thread.sleep(1500);
 			}
 		}
 	}

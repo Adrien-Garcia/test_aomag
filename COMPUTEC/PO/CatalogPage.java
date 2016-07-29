@@ -181,8 +181,15 @@ public class CatalogPage extends _BasePage {
 	 * @return le nombre de produits présents dans le bloc du comparateur
 	 */
 	public int getNumberProductsInComparator() {
-		int nb = Integer.parseInt(nbComparator.getText());
-		return nb;
+		if (isElementPresent(nbComparator)){
+			// On recupere la valeur entre les deux parentheses
+			String nbComp = nbComparator.getText();
+			nbComp =	nbComp.replaceAll("\\(","");
+			nbComp =	nbComp.replaceAll("\\)","");
+			return Integer.parseInt(nbComp);
+		}
+		else
+			return 0;
 	}
 
 

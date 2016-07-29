@@ -25,7 +25,7 @@ public class AccesPanier extends DesiredCapabilitiesTestNG {
 
 	@Test(description="Accés au panier par le header")
 	public void testAccesPanierLienHeaderRwd() throws Exception {
-		log.info(":: Test Thème Rwd :: accès au panier par le lien du header ::");
+		log.info(":: Test COMPUTEC :: accès au panier par le lien du header ::");
 		
 		// On accéde au panier directement par le lien du header
 		homePage = new HomePage(driver);

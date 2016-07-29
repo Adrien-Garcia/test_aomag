@@ -113,7 +113,6 @@ public class RegisterPage extends _BasePage {
 			confirmationInput.clear();
 			confirmationInput.sendKeys(pass);
 			registerBtn.click();
-			this.goToAccountPage();
 			return new AccountPage(driver);
 		} catch (Exception e) {
 			throw new PageObjectException(this.driver,e);

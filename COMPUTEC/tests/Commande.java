@@ -1,7 +1,7 @@
 package tests.test_aomagento.COMPUTEC.tests;
 
 import base.ComplexReportFactory;
-import base.Constant;
+import tests.test_aomagento.COMPUTEC.utilitaries.Constant;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.COMPUTEC.PO.AccountPage;
 import tests.test_aomagento.COMPUTEC.PO.CatalogPage;

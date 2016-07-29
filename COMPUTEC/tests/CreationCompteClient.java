@@ -2,7 +2,8 @@ package tests.test_aomagento.COMPUTEC.tests;
 
 import java.sql.Timestamp;
 
-import base.Constant;
+import tests.test_aomagento.COMPUTEC.utilitaries.Constant;
+import tests.test_aomagento.COMPUTEC.utilitaries.pageObjectTools;
 import base.DesiredCapabilitiesTestNG;
 import tests.test_aomagento.COMPUTEC.PO.AccountPage;
 import tests.test_aomagento.COMPUTEC.PO.HomePage;
@@ -22,6 +23,8 @@ public class CreationCompteClient extends DesiredCapabilitiesTestNG {
 	SignInPage signInPage;
 	RegisterPage registerPage;
 	AccountPage accountPage;
+	
+	pageObjectTools pageTools;
 
 	@Test(description="Création d'un compte")
 	public void testCreationCompte() throws Exception {
@@ -50,12 +53,9 @@ public class CreationCompteClient extends DesiredCapabilitiesTestNG {
 		accountPage = registerPage.createAccount(Constant.Firstname, Constant.Lastname, email, Constant.Password,
 				false);
 
-		// On se déconnecte
-		homePage = accountPage.logOutUser();
-
-		// puis on tente de se reconnecter
-		signInPage = homePage.clickConnectionClient();
-		accountPage = signInPage.SignInAction(email, Constant.Password);
+		// On test la connection
+		pageTools = new pageObjectTools();
+		accountPage=pageTools.connectionClient(homePage.getDriver(), email, Constant.Password);
 		Assert.assertTrue(accountPage.isUserLoggedIn());
 	}
 

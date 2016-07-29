@@ -102,6 +102,10 @@ public class _BasePage {
 		checkPageIsReady();
 		// driver.manage().window().maximize();
 	}
+	
+	public RemoteWebDriver getDriver(){
+		return this.driver;
+	}
 
 	/**
 	 * Utilise le lien du logo du header pour accéder à la page d'accueil
@@ -170,6 +174,8 @@ public class _BasePage {
 	 * @return <b>boolean</b>
 	 */
 	public boolean isCartEmpty() {
+		cartLink.click();
+		checkPageIsReady();
 		if (cartLink.getText().contains("(0)"))
 			return true;
 		else

@@ -28,7 +28,7 @@ public class LiensMenu extends DesiredCapabilitiesTestNG {
 			String categoryTitle = homePage.getNameCategory(i).toLowerCase();
 			categoryPage = homePage.goToCategory(i);
 			String pageTitle = categoryPage.getH1Title().toLowerCase();
-			Assert.assertTrue(categoryTitle.contains(pageTitle));
+			Assert.assertTrue(categoryTitle.equalsIgnoreCase(pageTitle));
 			homePage = categoryPage.goToHomePage();
 		}
 	}
